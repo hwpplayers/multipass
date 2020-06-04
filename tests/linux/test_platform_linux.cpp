@@ -22,6 +22,7 @@
 
 #include <src/platform/backends/libvirt/libvirt_virtual_machine_factory.h>
 #include <src/platform/backends/libvirt/libvirt_wrapper.h>
+#include <src/platform/backends/lxd/lxd_virtual_machine_factory.h>
 #include <src/platform/backends/qemu/qemu_virtual_machine_factory.h>
 
 #include <multipass/constants.h>
@@ -301,6 +302,11 @@ TEST_F(PlatformLinux, test_libvirt_driver_produces_correct_factory)
 {
     auto test = [this] { aux_test_driver_factory<mp::LibVirtVirtualMachineFactory>("libvirt"); };
     with_minimally_mocked_libvirt(test);
+}
+
+TEST_F(PlatformLinux, test_lxd_driver_produces_correct_factory)
+{
+    aux_test_driver_factory<mp::LXDVirtualMachineFactory>("lxd");
 }
 
 TEST_F(PlatformLinux, test_qemu_in_env_var_is_ignored)
